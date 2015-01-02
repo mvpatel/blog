@@ -14,24 +14,23 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface {
      */
     public function load(ObjectManager $manager) {
         for ($i = 1; $i <= 5; $i++) {
-                $tag = new Tag();
-                $tag->setTag('Tag ' .$i);
-                $tag->setIsPublished(rand(0, 1));
-                $tag->addBlog($this->getReference('blogid'.$i));
+            $tag = new Tag();
+            $tag->setTag('Tag ' . $i);
+            $tag->setIsPublished(true);
 
-                $manager->persist($tag);
-                $manager->flush();
+            $manager->persist($tag);
+            $manager->flush();
 
-                $this->addReference('tagid'.$i, $tag);
-            }
+            $this->addReference('tagid' . $i, $tag);
         }
-
-        /**
-         * {@inheritDoc}
-         */
-        public function getOrder() {
-            return 2; // the order in which fixtures will be loaded
-        }
-
+        
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder() {
+        return 1; // the order in which fixtures will be loaded
+    }
+
+}

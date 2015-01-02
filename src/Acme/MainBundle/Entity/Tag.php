@@ -1,6 +1,7 @@
 <?php
 
 namespace Acme\MainBundle\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,11 +21,10 @@ class Tag {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="blog", mappedBy="tags")
-     **/
-    
+     * */
     protected $blogs;
 
     /**
@@ -99,8 +99,7 @@ class Tag {
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->blogs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -110,10 +109,11 @@ class Tag {
      * @param \Acme\MainBundle\Entity\blog $blogs
      * @return Tag
      */
-    public function addBlog(\Acme\MainBundle\Entity\blog $blogs)
-    {
-        $this->blogs[] = $blogs;
-//        $blogs->addTag($this);
+    public function addBlog(\Acme\MainBundle\Entity\blog $blogs) {
+        if (!$this->blogs->contains($blogs)) {
+            $this->blogs[] = $blogs;
+            $blogs->addTag($this);
+        }
 
 
         return $this;
@@ -124,8 +124,7 @@ class Tag {
      *
      * @param \Acme\MainBundle\Entity\blog $blogs
      */
-    public function removeBlog(\Acme\MainBundle\Entity\blog $blogs)
-    {
+    public function removeBlog(\Acme\MainBundle\Entity\blog $blogs) {
         $this->blogs->removeElement($blogs);
     }
 
@@ -134,8 +133,8 @@ class Tag {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getBlogs()
-    {
+    public function getBlogs() {
         return $this->blogs;
     }
+
 }

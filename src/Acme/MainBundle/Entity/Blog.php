@@ -1,6 +1,7 @@
 <?php
 
 namespace Acme\MainBundle\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,21 +21,19 @@ class Blog {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="tag", inversedBy="blogs")
      * @ORM\JoinTable(name="blog_tag",
      *      joinColumns={@ORM\JoinColumn(name="blog_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
      *      )
-     **/
+     * */
     protected $tags;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->tags = new ArrayCollection();
     }
-    
 
     /**
      * @var string
@@ -42,7 +41,7 @@ class Blog {
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
-    
+
     /**
      * @var string
      *
@@ -55,7 +54,6 @@ class Blog {
      *
      * @ORM\Column(name="author", type="string", length=255)
      */
-    
     private $author;
 
     /**
@@ -225,15 +223,13 @@ class Blog {
         return strval($this->id);
     }
 
-
     /**
      * Set subTitle
      *
      * @param string $subTitle
      * @return Blog
      */
-    public function setSubTitle($subTitle)
-    {
+    public function setSubTitle($subTitle) {
         $this->subTitle = $subTitle;
 
         return $this;
@@ -244,8 +240,7 @@ class Blog {
      *
      * @return string 
      */
-    public function getSubTitle()
-    {
+    public function getSubTitle() {
         return $this->subTitle;
     }
 
@@ -255,10 +250,11 @@ class Blog {
      * @param \Acme\MainBundle\Entity\tag $tags
      * @return Blog
      */
-    public function addTag(\Acme\MainBundle\Entity\tag $tags)
-    {
-        $this->tags[] = $tags;
-//        $tags->addBlog($this);
+    public function addTag(\Acme\MainBundle\Entity\tag $tags) {
+        if (!$this->tags->contains($tags)) {
+            $this->tags[] = $tags;
+            $tags->addBlog($this);
+        }
 
         return $this;
     }
@@ -268,8 +264,7 @@ class Blog {
      *
      * @param \Acme\MainBundle\Entity\tag $tags
      */
-    public function removeTag(\Acme\MainBundle\Entity\tag $tags)
-    {
+    public function removeTag(\Acme\MainBundle\Entity\tag $tags) {
         $this->tags->removeElement($tags);
     }
 
@@ -278,8 +273,8 @@ class Blog {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTags()
-    {
+    public function getTags() {
         return $this->tags;
     }
+
 }
