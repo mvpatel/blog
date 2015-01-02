@@ -1,0 +1,8 @@
+acme_main_tag:
+    resource: "@AcmeMainBundle/Resources/config/routing/tag.yml"
+    prefix:   /tag
+
+acme_main_blog:
+    resource: "@AcmeMainBundle/Resources/config/routing/blog.yml"
+    prefix:   /blog
+

@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Featured Blog Post</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p>
+            {#                        <a class="btn btn-lg btn-success" href="{{ path('view_post') }}" role="button">Read More</a>#}
+        </p>
+    </div>
+
+    <div class="row marketing">
+        {% for entity in entities %}
+            <h3>
+                Blogs for {{  entity.tag  }}
+            </h3>
+            <hr>
+            {% for blog in entity.blogs %}
+                <div class="col-lg-6">
+
+                    <h4>{{ blog.title }}</h4>
+                    <p>{{ blog.subTitle}}</p>
+                    <p>{{ blog.content}}</p>
+                    <p><a href="{{ path('blog_show', { 'id': blog.id }) }}" class="btn btn-default btn-sm">Read More</a></p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+tag:
+    path:     /
+    defaults: { _controller: "AcmeMainBundle:Tag:index" }
+
+tag_show:
+    path:     /{id}/show
+    defaults: { _controller: "AcmeMainBundle:Tag:show" }
+    
+by_tag_show:
+    path:     /{tagId}/tagshow
+    defaults: { _controller: "AcmeMainBundle:Tag:tag" }
+
+tag_new:
+    path:     /new
+    defaults: { _controller: "AcmeMainBundle:Tag:new" }
+
+tag_create:
+    path:     /create
+    defaults: { _controller: "AcmeMainBundle:Tag:create" }
+    requirements: { _method: post }
+
+tag_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AcmeMainBundle:Tag:edit" }
+
+tag_update:
+    path:     /{id}/update
+    defaults: { _controller: "AcmeMainBundle:Tag:update" }
+    requirements: { _method: post|put }
+
+tag_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AcmeMainBundle:Tag:delete" }
+    requirements: { _method: post|delete }
