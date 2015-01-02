@@ -18,6 +18,7 @@ Instructions
 
 Please follow all steps bellow
 1. Download this Repository.
+
 2. Use Following Command for update all useful dependencies
     Don't forget to provide parameters for update app/config/parameters.yml
     composer update
